@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 
 class WarehouseListComponent extends Component {
   componentDidMount() {
+    // calling redux function to fetch all warehouses
     this.props.warehouseActions.fetchAllWarehouses();
   }
 
   render() {
     return (
-      <div className="WarehouseListComponent">
-        <div className="container-fluid">
+      <div className="WarehouseListComponent container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <center>
             <h3

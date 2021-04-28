@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from '../../../store/actions/AdminUserAction';
 import Axios from 'axios';
@@ -15,6 +16,7 @@ class GetAllUsersComponent extends Component {
   }
 
   componentDidMount() {
+       // calling redux function to fetch all assets
     this.props.userActions.fetchAllUsers();
   }
 
@@ -37,7 +39,8 @@ class GetAllUsersComponent extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div class="GetAllUsersComponent container-fluid">
+      <div className="container-fluid table-responsive">
         <Alert variant={'success'} show={this.state.visible}>
           User Deleted
         </Alert>
@@ -83,6 +86,11 @@ class GetAllUsersComponent extends Component {
               ))}
           </tbody>
         </table>
+      </div>
+      
+          <div class="text-center">
+                <Link to="/admin/home"><button type="button" class="btn btn-secondary">Go Back</button></Link>
+                    </div>
       </div>
     );
   }

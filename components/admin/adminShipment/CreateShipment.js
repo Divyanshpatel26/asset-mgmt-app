@@ -7,6 +7,8 @@ import * as shipmentActions from '../../../store/actions/ShipmentAction';
 class CreateShipmentComponent extends Component {
   constructor(props) {
     super(props);
+
+    // to declared state as empty for the first time, it will get replaced once user enters the data
     this.state = {
       shipmentId: '',
       assetId: '',
@@ -17,19 +19,30 @@ class CreateShipmentComponent extends Component {
       shipmentDate: '',
       deliveryDate: '',
     };
+
+    // to bind handleInputChange function
     this.handleInputChange = this.handleInputChange.bind(this);
+
+     // to bind createShipment function
     this.createShipment = this.createShipment.bind(this);
   }
 
+  // to handle all Input Change
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
+  
+// to create Shipment
   createShipment(e) {
+
+    
+    // to prevent from default submit
     e.preventDefault();
 
+     //data which user enters
     let payload = {
       shipmentId: this.state.shipmentId,
       assetId: this.state.assetId,
@@ -42,11 +55,15 @@ class CreateShipmentComponent extends Component {
     };
 
     const { shipmentActions } = this.props;
+    // to call createShipment method in shipment actions
     shipmentActions.createShipment(payload);
+    // to call fetchAllShipment method in shipment actions
     this.props.shipmentActions.fetchAllShipment();
+    // direct the page after creation to the specifed location
     window.location.href = '/admin/shipment/all';
   }
 
+  // to clear the form after the submission of data
   clear() {
     this.setSate = {
       shipmentId: '',
@@ -61,6 +78,7 @@ class CreateShipmentComponent extends Component {
   }
 
   render() {
+    // to display date only till current date and disable future date 
     let currentDate = () => {
       var today = new Date();
       var dd = today.getDate();
@@ -79,7 +97,7 @@ class CreateShipmentComponent extends Component {
     };
 
     return (
-      <div className="CreateShipment">
+      <div className="CreateShipment container-fluid">
         <br></br>
         <center>
           <h3
@@ -93,7 +111,7 @@ class CreateShipmentComponent extends Component {
           </h3>
         </center>
         <br></br>
-        <div className="container-fluid" id="createship" align="center">
+        <div className="container-fluid table-responsive" id="createship" align="center">
           <form onSubmit={this.createShipment}>
             <table>
               <tbody>
@@ -110,6 +128,7 @@ class CreateShipmentComponent extends Component {
                       id="assetId"
                       value={this.state.assetId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -127,6 +146,7 @@ class CreateShipmentComponent extends Component {
                       id="userId"
                       value={this.state.userId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -173,6 +193,7 @@ class CreateShipmentComponent extends Component {
                       id="sourceWhId"
                       value={this.state.sourceWhId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -190,6 +211,7 @@ class CreateShipmentComponent extends Component {
                       id="destWhId"
                       value={this.state.destWhId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -207,6 +229,7 @@ class CreateShipmentComponent extends Component {
                       id="shipmentDate"
                       value={this.state.shipmentDate}
                       onChange={this.handleInputChange}
+                    
                       max={currentDate()}
                       required
                     ></input>
@@ -225,6 +248,7 @@ class CreateShipmentComponent extends Component {
                       id="deliveryDate"
                       value={this.state.deliveryDate}
                       onChange={this.handleInputChange}
+                     
                       max={currentDate()}
                       required
                     ></input>

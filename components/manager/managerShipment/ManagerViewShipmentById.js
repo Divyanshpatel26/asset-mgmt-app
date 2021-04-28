@@ -7,13 +7,15 @@ import * as shipmentActions from '../../../store/actions/Manager_ShipmentAction'
 class ManagerViewShipmentByIdComponent extends React.Component {
   componentDidMount() {
     const { shipmentActions, match } = this.props;
+
+    // calling redux function to fetch a particular id
     shipmentActions.fetchShipmentById(match.params.id);
   }
   render() {
     const { shipments } = this.props;
     return (
-      <div className="ViewShipment" align="center">
-        <div className="container-fluid">
+      <div className="ViewShipment container-fluid" align="center">
+        <div className="container-fluid table-responsive">
           <h3>SHIPMENT DETAIL</h3>
           <br></br>
           {shipments !== undefined ? (

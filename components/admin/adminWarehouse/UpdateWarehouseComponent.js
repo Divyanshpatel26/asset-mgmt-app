@@ -8,6 +8,7 @@ class UpdateWarehouseComponent extends Component {
   constructor(props) {
     super(props);
 
+     // to get the existing data
     this.whId = React.createRef();
     this.mgrId = React.createRef();
     this.location = React.createRef();
@@ -20,12 +21,14 @@ class UpdateWarehouseComponent extends Component {
 
   componentDidMount() {
     const { warehouseActions, match } = this.props;
+    // calling redux function to fetch a particular id
     warehouseActions.fetchWarehouseById(match.params.id);
   }
 
   updateWarehouse(e) {
     e.preventDefault();
 
+    //data which user enters
     let payload = {
       whId: this.whId.current.value,
       mgrId: this.mgrId.current.value,
@@ -37,6 +40,7 @@ class UpdateWarehouseComponent extends Component {
 
     const { warehouseActions } = this.props;
     warehouseActions.updateWarehouse(payload);
+    this.props.warehouseActions.fetchAllWarehouses();
   }
 
   render() {
@@ -47,7 +51,7 @@ class UpdateWarehouseComponent extends Component {
     }
 
     return (
-      <div className="WarehouseListComponent">
+      <div className="WarehouseListComponent container-fluid">
         <br></br>
         <center>
           <h3
@@ -63,7 +67,7 @@ class UpdateWarehouseComponent extends Component {
         </center>
         <br></br>
         {warehouse !== undefined ? (
-          <div className="container-fluid" id="updateware" align="center">
+          <div className="container-fluid table-responsive" id="updateware" align="center">
             <form onSubmit={this.updateWarehouse}>
               <table>
                 <tbody>
@@ -91,6 +95,7 @@ class UpdateWarehouseComponent extends Component {
                         defaultValue={warehouse.mgrId}
                         type="text"
                         ref={this.mgrId}
+                        pattern="^[0-9]*$" title="Enter Number only"
                         required
                       />
                     </td>
@@ -105,6 +110,7 @@ class UpdateWarehouseComponent extends Component {
                         defaultValue={warehouse.address.location}
                         type="text"
                         ref={this.location}
+                        pattern="^[a-zA-Z ]+$" title="Enter Character only"
                         required
                       />
                     </td>
@@ -119,6 +125,7 @@ class UpdateWarehouseComponent extends Component {
                         defaultValue={warehouse.address.subLocation}
                         type="text"
                         ref={this.subLocation}
+                        pattern="^[a-zA-Z ]+$" title="Enter Character only"
                         required
                       />
                     </td>
@@ -133,6 +140,7 @@ class UpdateWarehouseComponent extends Component {
                         defaultValue={warehouse.address.state}
                         type="text"
                         ref={this.state}
+                        pattern="^[a-zA-Z ]+$" title="Enter Character only"
                         required
                       />
                     </td>
@@ -147,6 +155,7 @@ class UpdateWarehouseComponent extends Component {
                         defaultValue={warehouse.address.country}
                         type="text"
                         ref={this.country}
+                        pattern="^[a-zA-Z ]+$" title="Enter Character only"
                         required
                       />
                     </td>

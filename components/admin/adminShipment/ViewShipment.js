@@ -12,18 +12,22 @@ class ViewShipmentComponent extends Component {
   }
 
   componentDidMount() {
+
+      // to call the fetchAllShipment function in shipment action
     this.props.shipmentActions.fetchAllShipment();
   }
 
   render() {
     return (
-      <div className="ViewShipment">
-        <div className="container-fluid">
+      <div className="ViewShipment container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <h3 align="center"> SHIPMENT DETAILS </h3>
           <br></br>
 
           {this.props.shipment !== undefined ? (
+
+            // to display the shipment details in table format
             <table className="table table-striped table table-bordered table table-hover">
               <thead className="p-3 mb-2 bg-info text-white">
                 <tr>

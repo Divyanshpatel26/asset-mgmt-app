@@ -11,13 +11,14 @@ class ManagerViewShipmentComponent extends Component {
   }
 
   componentDidMount() {
+     // calling redux function to fetch all shipments
     this.props.shipmentActions.fetchAllShipment();
   }
 
   render() {
     return (
-      <div className="ViewShipment">
-        <div className="container-fluid">
+      <div className="ViewShipment container-fluid">
+        <div className="container-fluid table-responsive">
           <h3 align="center"> SHIPMENT DETAILS </h3>
           {this.props.shipment !== undefined ? (
             <table className="table table-striped table table-bordered table table-hover">
@@ -66,7 +67,7 @@ class ManagerViewShipmentComponent extends Component {
 
                     <td>
                       <Link
-                        to={`/shipment/status/update/${shipment.shipmentId}`}
+                        to={`/manager/shipment/status/update/${shipment.shipmentId}`}
                         disabled={
                           shipment.status === 'DELIVERED' ? true : false
                         }

@@ -7,8 +7,8 @@ import * as warehouseActions from '../../../store/actions/WarehouseActions';
 class CreateWarehouseComponent extends Component {
   constructor(props) {
     super(props);
+     //declared state as empty for the first time, it will get replaced once user enters the data
     this.state = {
-      //whId: '',
       mgrId: '',
       location: '',
       subLocation: '',
@@ -19,6 +19,7 @@ class CreateWarehouseComponent extends Component {
     this.createWarehouse = this.createWarehouse.bind(this);
   }
 
+  // to handle all changes
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
@@ -28,8 +29,9 @@ class CreateWarehouseComponent extends Component {
   createWarehouse(e) {
     e.preventDefault();
 
+    //data which user enters
     let payload = {
-      //whId: this.state.whId,
+    
       mgrId: this.state.mgrId,
       location: this.state.location,
       subLocation: this.state.subLocation,
@@ -44,7 +46,7 @@ class CreateWarehouseComponent extends Component {
 
   clear() {
     this.setSate = {
-      //whId: '',
+     
       mgrId: '',
       location: '',
       subLocation: '',
@@ -55,7 +57,7 @@ class CreateWarehouseComponent extends Component {
 
   render() {
     return (
-      <div className="CreateWarehouseComponent">
+      <div className="CreateWarehouseComponent container-fluid">
         <center>
           <h3
             style={{
@@ -69,7 +71,7 @@ class CreateWarehouseComponent extends Component {
           </h3>
         </center>
         <br></br>
-        <div className="container-fluid" id="createware" align="center">
+        <div className="container-fluid table-responsive" id="createware" align="center">
           <form onSubmit={this.createWarehouse}>
             <table>
               <tbody>
@@ -86,6 +88,7 @@ class CreateWarehouseComponent extends Component {
                       id="mgrId"
                       value={this.state.mgrId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -103,6 +106,7 @@ class CreateWarehouseComponent extends Component {
                       id="location"
                       value={this.state.location}
                       onChange={this.handleInputChange}
+                      pattern="^[a-zA-Z ]+$" title="Enter Character only"
                       required
                     ></input>
                   </td>
@@ -120,6 +124,7 @@ class CreateWarehouseComponent extends Component {
                       id="subLocation"
                       value={this.state.subLocation}
                       onChange={this.handleInputChange}
+                      pattern="^[a-zA-Z ]+$" title="Enter Character only"
                       required
                     ></input>
                   </td>
@@ -137,6 +142,7 @@ class CreateWarehouseComponent extends Component {
                       id="state"
                       value={this.state.state}
                       onChange={this.handleInputChange}
+                      pattern="^[a-zA-Z ]+$" title="Enter Character only"
                       required
                     ></input>
                   </td>
@@ -154,6 +160,7 @@ class CreateWarehouseComponent extends Component {
                       id="country"
                       value={this.state.country}
                       onChange={this.handleInputChange}
+                      pattern="^[a-zA-Z ]+$" title="Enter Character only"
                       required
                     ></input>
                   </td>

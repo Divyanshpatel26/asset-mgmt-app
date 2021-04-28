@@ -7,13 +7,15 @@ import * as assetActions from '../../../store/actions/Manager_AssetActions';
 class GetAssetByIdComponentWM extends Component {
   componentDidMount() {
     const { assetActions, match } = this.props;
+
+       // calling redux function to fetch a particular id
     assetActions.fetchAssetById(match.params.id);
   }
   render() {
     const { asset } = this.props;
     return (
-      <div className="AssetListComponent">
-        <div className="container-fluid">
+      <div className="AssetListComponent container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <br></br>
           <center>

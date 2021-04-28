@@ -6,17 +6,19 @@ import { connect } from 'react-redux';
 class fetchUserDetailsComponent extends Component {
   componentDidMount() {
     const { userActions, match } = this.props;
+
+     // calling redux function to fetch a particular id
     userActions.fetchUserById(match.params.id);
   }
 
   render() {
     const { user } = this.props;
     return user !== undefined ? (
-      <div>
-        <h2>User Data</h2>
+      <div class="GetAllUsersComponent container-fluid">
+        <center><h3  style={{backgroundColor : 'rgba(25, 55, 77)', width :'200px',color:'white'}}>USER DATA</h3></center><br></br>
         <div className="container d-flex justify-content-center align-items-center">
           <table
-            className="table table-striped table-sm felx-d justify-content-center align-items-center w-50 p-3"
+            className="table table-striped table-sm felx-d justify-content-center align-items-center w-50 p-3 table-responsive"
             border="1"
           >
             <thead className="thead-dark">
@@ -56,11 +58,17 @@ class fetchUserDetailsComponent extends Component {
               }
             </tbody>
           </table>
+          
         </div>
+        <br></br><br></br>
+          <div class="text-center">
+                <Link to="/admin/usersList"><button type="button" class="btn btn-secondary">Go Back</button></Link>
+                    </div>
       </div>
     ) : (
       <h3>User Not Found</h3>
     );
+    
   }
 }
 

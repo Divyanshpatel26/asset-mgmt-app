@@ -8,6 +8,7 @@ class ManagerUpdateShipmentComponent extends Component {
   constructor(props) {
     super(props);
 
+    // to get the existing data
     this.shipmentId = React.createRef();
     this.assetId = React.createRef();
     this.userId = React.createRef();
@@ -22,12 +23,16 @@ class ManagerUpdateShipmentComponent extends Component {
 
   componentDidMount() {
     const { shipmentActions, match } = this.props;
+
+     // calling redux function to fetch a particular id
     shipmentActions.fetchShipmentById(match.params.id);
+    this.props.shipmentActions.fetchAllShipment();
   }
 
   updateShipment(e) {
     e.preventDefault();
 
+      //data which user enters
     let payload = {
       shipmentId: this.shipmentId.current.value,
       assetId: this.assetId.current.value,
@@ -46,6 +51,23 @@ class ManagerUpdateShipmentComponent extends Component {
   }
 
   render() {
+    // to display date only till current date and disable future date 
+    let currentDate = () => {
+      var today = new Date();
+      var dd = today.getDate();
+ 
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+ 
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      today = yyyy + '-' + mm + '-' + dd;
+      return today;
+    };
     const { shipment, updateShipment } = this.props;
 
     if (updateShipment !== undefined && updateShipment) {
@@ -53,10 +75,10 @@ class ManagerUpdateShipmentComponent extends Component {
     }
 
     return (
-      <div className="UpdateShipment">
+      <div className="UpdateShipment container-fluid">
         <h3 align="center">UPDATE SHIPMENT</h3>
         {shipment !== undefined ? (
-          <div className="container-fluid" id="updateship" align="center">
+          <div className="container-fluid table-responsive" id="updateship" align="center">
             <form onSubmit={this.updateShipment}>
               <table>
                 <tbody>
@@ -84,6 +106,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.assetId}
                         type="text"
                         ref={this.assetId}
+                        pattern="^[0-9]*$" title="Enter Number only"
                         required
                       />
                     </td>
@@ -98,6 +121,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.userId}
                         type="text"
                         ref={this.userId}
+                        pattern="^[0-9]*$" title="Enter Number only"
                         required
                       />
                     </td>
@@ -138,6 +162,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.sourceWhId}
                         type="text"
                         ref={this.sourceWhId}
+                        pattern="^[0-9]*$" title="Enter Number only"
                         required
                       />
                     </td>
@@ -152,6 +177,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.destWhId}
                         type="text"
                         ref={this.destWhId}
+                        pattern="^[0-9]*$" title="Enter Number only"
                         required
                       />
                     </td>
@@ -166,6 +192,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.shipmentDate}
                         type="date"
                         ref={this.shipmentDate}
+                        max={currentDate()}
                         required
                       />
                     </td>
@@ -180,6 +207,7 @@ class ManagerUpdateShipmentComponent extends Component {
                         defaultValue={shipment.deliveryDate}
                         type="date"
                         ref={this.deliveryDate}
+                        max={currentDate()}
                         required
                       />
                     </td>

@@ -7,13 +7,14 @@ import * as warehouseActions from '../../../store/actions/WarehouseActions';
 class WarehousebyIdComponent extends Component {
   componentDidMount() {
     const { warehouseActions, match } = this.props;
+    // calling redux function to fetch a particular id
     warehouseActions.fetchWarehouseById(match.params.id);
   }
   render() {
     const { warehouse } = this.props;
     return (
-      <div className="WarehouseListComponent">
-        <div className="container-fluid">
+      <div className="WarehouseListComponent container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <center>
             <h3

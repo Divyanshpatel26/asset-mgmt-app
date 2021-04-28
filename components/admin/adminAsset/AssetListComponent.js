@@ -9,13 +9,14 @@ class AssetListComponent extends React.Component {
     super();
   }
   componentDidMount() {
+    // calling redux function to fetch all assets
     this.props.assetActions.fetchAllAssets();
   }
 
   render() {
     return (
-      <div className="AssetListComponent">
-        <div className="container-fluid">
+      <div className="AssetListComponent container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <br></br>
           <center>

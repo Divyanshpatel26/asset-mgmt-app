@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 export default function DeleteUserByIdComponent(props) {
   useEffect(() => {
     delUser();
+    this.props.userActions.fetchAllUsers();
   });
 
   const delUser = () => {

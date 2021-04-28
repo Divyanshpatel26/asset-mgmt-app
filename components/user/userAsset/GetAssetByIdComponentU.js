@@ -7,13 +7,15 @@ import * as assetActions from '../../../store/actions/User_AssetActions';
 class GetAssetByIdComponentU extends Component {
   componentDidMount() {
     const { assetActions, match } = this.props;
+
+    //call the fetchAssetId function in asset action
     assetActions.fetchAssetById(match.params.id);
   }
   render() {
     const { asset } = this.props;
     return (
-      <div className="AssetListComponent">
-        <div className="container-fluid">
+      <div className="AssetListComponent container-fluid">
+        <div className="container-fluid table-responsive">
           <br></br>
           <br></br>
           <center>
@@ -30,6 +32,7 @@ class GetAssetByIdComponentU extends Component {
           </center>
           <br></br>
           {asset !== undefined ? (
+             // to display the asset details in table format
             <table className="table table-striped table table-bordered table table-hover">
               <thead className="thead-dark">
                 <tr>

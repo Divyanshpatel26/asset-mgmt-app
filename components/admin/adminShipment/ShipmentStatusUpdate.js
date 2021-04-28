@@ -1,36 +1,31 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as shipmentActions from '../../../store/actions/ShipmentAction';
+import { Redirect } from 'react-router';
 
 class ShipmentStatusUpdate extends React.Component {
   componentDidMount() {
     const { shipmentActions, match } = this.props;
+
+    // to call the ShipmentUpdateStatus function in shipment action
     shipmentActions.ShipmentUpdateStatus(match.params.id);
+
+    // to call the fetchAllShipment function in shipment action
+    this.props.shipmentActions.fetchAllShipment();
   }
   render() {
     const { shipments } = this.props;
-    return (
-      <div>
-        <h4>Do you want to change the Shipment Status ?</h4>
-        <h6>To DELIVERED</h6>
-        <button onClick="window.location.href = '/shipment/status/update/${shipment.shipmentId}'">
-          Update
-          {this.props.history.push('/admin/shipment/all')}
-          {/* return <Redirect to='/shipment/all'/> */}
-        </button>
-        <span> </span>
-        <button onClick="window.location.href = '/admin/shipment/all';">
-          Cancel
-        </button>
-      </div>
-    );
+
+    // to redirect after status is updated shipment
+    return <Redirect to="/admin/shipment/all" />;
+    
   }
 }
 
 function mapStateToProps(state) {
-  return { shipments: state.shipmentReducer.shipmentStatus };
+  return { shipments: state.shipmentReducer.shipmentStatus,
+    shipment: state.shipmentReducer.shipment };
 }
 
 function mapDispatchToProps(dispatch) {

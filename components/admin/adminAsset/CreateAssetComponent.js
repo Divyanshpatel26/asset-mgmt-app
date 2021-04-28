@@ -7,9 +7,8 @@ import * as assetActions from '../../../store/actions/Admin_AssetActions';
 class CreateAssetComponent extends Component {
   constructor(props) {
     super(props);
+     //declared state as empty for the first time, it will get replaced once user enters the data
     this.state = {
-      // assetId: '',
-
       whId: '',
       mgrId: '',
       location: '',
@@ -25,12 +24,14 @@ class CreateAssetComponent extends Component {
     this.createAsset = this.createAsset.bind(this);
   }
 
+  // to handle all changes
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
+    //to handle only on submit click change 
   handleSubmitChange() {
     alert('Asset created with Asset Id:' + this.state.assetId);
   }
@@ -38,9 +39,9 @@ class CreateAssetComponent extends Component {
   createAsset(e) {
     e.preventDefault();
 
+    //data which user enters
     let payload = {
-      // assetId: payload.assetId,
-
+     
       whId: this.state.whId,
       mgrId: this.state.mgrId,
 
@@ -76,7 +77,7 @@ class CreateAssetComponent extends Component {
 
   render() {
     return (
-      <div className="CreateAssetComponent">
+      <div className="CreateAssetComponent container-fluid">
         <br></br>
         <br></br>
         <center>
@@ -91,7 +92,7 @@ class CreateAssetComponent extends Component {
           </h3>
         </center>
         <br></br>
-        <div className="container-fluid" id="createasset" align="center">
+        <div className="container-fluid table-responsive" id="createasset" align="center">
           <form onSubmit={this.createAsset}>
             <table>
               <tbody>
@@ -112,6 +113,7 @@ class CreateAssetComponent extends Component {
                       id="whId"
                       value={this.state.whId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -129,6 +131,7 @@ class CreateAssetComponent extends Component {
                       id="mgrId"
                       value={this.state.mgrId}
                       onChange={this.handleInputChange}
+                      pattern="^[0-9]*$" title="Enter Number only"
                       required
                     ></input>
                   </td>
@@ -189,6 +192,7 @@ class CreateAssetComponent extends Component {
                       id="manufacturer"
                       value={this.state.manufacturer}
                       onChange={this.handleInputChange}
+                      pattern="^[a-zA-Z]+$" title="Enter Character only"
                       required
                     ></input>
                   </td>

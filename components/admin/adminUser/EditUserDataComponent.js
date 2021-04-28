@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 class EditUserDataComponent extends Component {
   constructor(props) {
     super(props);
+
+        // to get the existing data
     this.state = {
       userName: this.props.location.userName,
       userPassword: this.props.location.userPassword,
@@ -16,16 +18,19 @@ class EditUserDataComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+   //to handle any change
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
+    //to handle change only on submit click 
   handleSubmit(event) {
     event.preventDefault();
     const { userActions, match } = this.props;
 
+    //data which user enters
     const payload = {
       userId: match.params.id,
       userName: this.state.userName,
@@ -39,8 +44,8 @@ class EditUserDataComponent extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Modify User Data</h2>
+      <div class="GetAllUsersComponent">
+      <center><h3  style={{backgroundColor : 'rgba(25, 55, 77)', width :'300px',color:'white'}}> MODIFY USER DATA</h3></center><br></br>
         <div className="d-flex justify-content-center align-items-center">
           <form
             className="align-items-center justify-content-center border w-25 p-3"
